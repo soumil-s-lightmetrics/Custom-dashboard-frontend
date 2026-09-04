@@ -1,0 +1,61 @@
+/*
+ * NOTE — deliberate "early prototype" styling.
+ *
+ * The palette is the real one, but the craft signals (soft radii, layered
+ * shadows, hover lift, refined type scale) are intentionally dialled down so
+ * this reads as an unfinished internal build rather than a shipping product.
+ * To restore the polished look, the only things that need changing are the
+ * radius/shadow tokens below and the `--proto-*` overrides in global.css.
+ */
+:root {
+  /* Primary magenta-purple, taken from the mockups' Next / Create buttons */
+  --purple: #92278f;
+  --purple-hover: #7d2179;
+  --purple-50: #fdf4fd;
+  --purple-100: #f9e8f8;
+  --purple-200: #eccbea;
+
+  /* Teal — the "Step 01" pills */
+  --teal: #0d9488;
+  --teal-bg: #e6f4f2;
+
+  /* Yellow — the BETA pill */
+  --amber: #92400e;
+  --amber-bg: #fef3c7;
+
+  /* Light blue — the chart-type popover */
+  --bluegrey-bg: #dfe9f3;
+  --bluegrey-hover: #cfdeed;
+  --bluegrey-active: #c3d6e8;
+  --chart-active: #0e7490;
+
+  --ink: #111827;
+  --ink-2: #374151;
+  --muted: #6b7280;
+  --muted-2: #9ca3af;
+
+  --bg: #ffffff;
+  --bg-2: #f4f4f5;
+  --bg-3: #ebebed;
+  --border: #c8c8cd;
+  --border-2: #a9a9b1;
+  --dashed: #b4b4bc;
+
+  --danger: #b91c1c;
+  --danger-bg: #fef2f2;
+  --stale: #b45309;
+
+  /* Squared off — no soft product-grade corners. */
+  --r-sm: 2px;
+  --r: 2px;
+  --r-lg: 2px;
+  --r-pill: 3px;
+
+  /* Flat. One crude drop shadow for popovers only. */
+  --shadow-sm: none;
+  --shadow: none;
+  --shadow-lg: 2px 2px 0 rgba(17, 24, 39, 0.18);
+
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
