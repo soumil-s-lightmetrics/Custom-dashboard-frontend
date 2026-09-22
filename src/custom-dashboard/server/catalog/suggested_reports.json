@@ -1,0 +1,1056 @@
+[
+  {
+    "id": "sug_fm_top_vehicles",
+    "personaId": "fleet_manager",
+    "title": "Top Vehicles by Trips",
+    "description": "Busiest vehicles over the period",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Top 10 vehicles by number of trips in the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "bar",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "bar",
+            "data": [
+              94,
+              81,
+              76,
+              68,
+              61,
+              55,
+              47,
+              40
+            ],
+            "barWidth": "62%",
+            "itemStyle": {
+              "color": "#3b82f6",
+              "borderRadius": [
+                4,
+                4,
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_fm_daily_trips",
+    "personaId": "fleet_manager",
+    "title": "Daily Trip Volume",
+    "description": "Trip counts per day across the fleet",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Show trip counts by day over the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "line",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "line",
+            "data": [
+              32,
+              41,
+              38,
+              52,
+              47,
+              61,
+              58,
+              66,
+              62,
+              71
+            ],
+            "smooth": true,
+            "symbol": "none",
+            "lineStyle": {
+              "width": 2,
+              "color": "#10b981"
+            },
+            "itemStyle": {
+              "color": "#10b981"
+            },
+            "areaStyle": {
+              "color": "#10b981",
+              "opacity": 0.18
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_fm_vehicle_activity",
+    "personaId": "fleet_manager",
+    "title": "Vehicle Activity",
+    "description": "Daily trip count for one vehicle",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Show trip counts by day for vehicle {asset} over the {range}",
+      "params": [
+        {
+          "key": "asset",
+          "kind": "asset",
+          "label": "Vehicle / asset",
+          "placeholder": "e.g. MH12AB1234"
+        },
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "line",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "line",
+            "data": [
+              4,
+              6,
+              5,
+              8,
+              7,
+              9,
+              6,
+              10,
+              8,
+              11
+            ],
+            "smooth": true,
+            "symbol": "none",
+            "lineStyle": {
+              "width": 2,
+              "color": "#8b5cf6"
+            },
+            "itemStyle": {
+              "color": "#8b5cf6"
+            },
+            "areaStyle": {
+              "color": "#8b5cf6",
+              "opacity": 0.18
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_sc_top_violations",
+    "personaId": "safety_coach",
+    "title": "Top Drivers by Violations",
+    "description": "Drivers with the most violations",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Top 10 drivers by number of violations in the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "bar",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "bar",
+            "data": [
+              88,
+              74,
+              69,
+              63,
+              57,
+              50,
+              44,
+              36
+            ],
+            "barWidth": "62%",
+            "itemStyle": {
+              "color": "#ef4444",
+              "borderRadius": [
+                4,
+                4,
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_sc_violation_mix",
+    "personaId": "safety_coach",
+    "title": "Violation Mix",
+    "description": "Share of each violation type",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Show event counts by violation type in the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "donut",
+      "echartsOption": {
+        "series": [
+          {
+            "type": "pie",
+            "radius": [
+              "42%",
+              "70%"
+            ],
+            "center": [
+              "50%",
+              "50%"
+            ],
+            "data": [
+              {
+                "value": 28,
+                "itemStyle": {
+                  "color": "#10b981"
+                }
+              },
+              {
+                "value": 22,
+                "itemStyle": {
+                  "color": "#3b82f6"
+                }
+              },
+              {
+                "value": 18,
+                "itemStyle": {
+                  "color": "#f59e0b"
+                }
+              },
+              {
+                "value": 14,
+                "itemStyle": {
+                  "color": "#ef4444"
+                }
+              },
+              {
+                "value": 10,
+                "itemStyle": {
+                  "color": "#8b5cf6"
+                }
+              },
+              {
+                "value": 8,
+                "itemStyle": {
+                  "color": "#ec4899"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_sc_driver_profile",
+    "personaId": "safety_coach",
+    "title": "Driver Safety Profile",
+    "description": "One driver's events broken down by category",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Show event counts by category for driver {driver} in the {range}",
+      "params": [
+        {
+          "key": "driver",
+          "kind": "driver",
+          "label": "Driver",
+          "placeholder": "e.g. Daniel Taylor"
+        },
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "bar",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "bar",
+            "data": [
+              34,
+              28,
+              24,
+              19,
+              15,
+              11,
+              8
+            ],
+            "barWidth": "62%",
+            "itemStyle": {
+              "color": "#f59e0b",
+              "borderRadius": [
+                4,
+                4,
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_om_top_drivers",
+    "personaId": "operations_manager",
+    "title": "Top Drivers by Trips",
+    "description": "Drivers ranked by trip count",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Top 10 drivers by number of trips in the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "bar",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "bar",
+            "data": [
+              102,
+              91,
+              84,
+              77,
+              70,
+              62,
+              54,
+              45
+            ],
+            "barWidth": "62%",
+            "itemStyle": {
+              "color": "#3b82f6",
+              "borderRadius": [
+                4,
+                4,
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_om_severity_split",
+    "personaId": "operations_manager",
+    "title": "Severity Split",
+    "description": "Events grouped by severity level",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Show event counts by severity level in the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "donut",
+      "echartsOption": {
+        "series": [
+          {
+            "type": "pie",
+            "radius": [
+              "42%",
+              "70%"
+            ],
+            "center": [
+              "50%",
+              "50%"
+            ],
+            "data": [
+              {
+                "value": 42,
+                "itemStyle": {
+                  "color": "#10b981"
+                }
+              },
+              {
+                "value": 31,
+                "itemStyle": {
+                  "color": "#f59e0b"
+                }
+              },
+              {
+                "value": 18,
+                "itemStyle": {
+                  "color": "#ef4444"
+                }
+              },
+              {
+                "value": 9,
+                "itemStyle": {
+                  "color": "#8b5cf6"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_om_driver_trend",
+    "personaId": "operations_manager",
+    "title": "Driver Trip Trend",
+    "description": "One driver's trips per day",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Show trip counts by day for driver {driver} over the {range}",
+      "params": [
+        {
+          "key": "driver",
+          "kind": "driver",
+          "label": "Driver",
+          "placeholder": "e.g. Daniel Taylor"
+        },
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "line",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "line",
+            "data": [
+              6,
+              9,
+              7,
+              11,
+              8,
+              12,
+              10,
+              14,
+              11,
+              15
+            ],
+            "smooth": true,
+            "symbol": "none",
+            "lineStyle": {
+              "width": 2,
+              "color": "#10b981"
+            },
+            "itemStyle": {
+              "color": "#10b981"
+            },
+            "areaStyle": {
+              "color": "#10b981",
+              "opacity": 0.18
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_in_device_health",
+    "personaId": "installer",
+    "title": "Devices by Health Events",
+    "description": "Devices reporting the most health events",
+    "domain": "diagnostics",
+    "query": {
+      "questionTemplate": "Top 10 devices by health events in the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "bar",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "bar",
+            "data": [
+              57,
+              49,
+              44,
+              38,
+              33,
+              27,
+              21,
+              16
+            ],
+            "barWidth": "62%",
+            "itemStyle": {
+              "color": "#8b5cf6",
+              "borderRadius": [
+                4,
+                4,
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_in_health_trend",
+    "personaId": "installer",
+    "title": "Health Event Trend",
+    "description": "Device health events per day",
+    "domain": "diagnostics",
+    "query": {
+      "questionTemplate": "Show device health events by day over the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "line",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "line",
+            "data": [
+              18,
+              24,
+              21,
+              29,
+              26,
+              33,
+              28,
+              36,
+              31,
+              38
+            ],
+            "smooth": true,
+            "symbol": "none",
+            "lineStyle": {
+              "width": 2,
+              "color": "#3b82f6"
+            },
+            "itemStyle": {
+              "color": "#3b82f6"
+            },
+            "areaStyle": {
+              "color": "#3b82f6",
+              "opacity": 0.18
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_in_asset_diagnostics",
+    "personaId": "installer",
+    "title": "Asset Diagnostics",
+    "description": "One asset's health events by type",
+    "domain": "diagnostics",
+    "query": {
+      "questionTemplate": "Show health events by type for asset {asset} in the {range}",
+      "params": [
+        {
+          "key": "asset",
+          "kind": "asset",
+          "label": "Vehicle / asset",
+          "placeholder": "e.g. MH12AB1234"
+        },
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "bar",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "bar",
+            "data": [
+              21,
+              17,
+              14,
+              11,
+              8,
+              6,
+              4
+            ],
+            "barWidth": "62%",
+            "itemStyle": {
+              "color": "#f59e0b",
+              "borderRadius": [
+                4,
+                4,
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_gen_top_drivers",
+    "personaId": "generalist",
+    "title": "Top Drivers by Events",
+    "description": "Drivers with the most events",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Top 10 drivers by number of events in the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "bar",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "bar",
+            "data": [
+              96,
+              83,
+              75,
+              67,
+              59,
+              51,
+              43,
+              35
+            ],
+            "barWidth": "62%",
+            "itemStyle": {
+              "color": "#3b82f6",
+              "borderRadius": [
+                4,
+                4,
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_gen_daily_events",
+    "personaId": "generalist",
+    "title": "Daily Event Counts",
+    "description": "Events per day across the fleet",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Show event counts by day over the {range}",
+      "params": [
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "line",
+      "echartsOption": {
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        "yAxis": {
+          "type": "value"
+        },
+        "series": [
+          {
+            "type": "line",
+            "data": [
+              44,
+              52,
+              48,
+              61,
+              57,
+              68,
+              64,
+              73,
+              69,
+              78
+            ],
+            "smooth": true,
+            "symbol": "none",
+            "lineStyle": {
+              "width": 2,
+              "color": "#10b981"
+            },
+            "itemStyle": {
+              "color": "#10b981"
+            },
+            "areaStyle": {
+              "color": "#10b981",
+              "opacity": 0.18
+            }
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  },
+  {
+    "id": "sug_gen_driver_profile",
+    "personaId": "generalist",
+    "title": "Driver Event Profile",
+    "description": "One driver's events by category",
+    "domain": "trip",
+    "query": {
+      "questionTemplate": "Show event counts by category for driver {driver} in the {range}",
+      "params": [
+        {
+          "key": "driver",
+          "kind": "driver",
+          "label": "Driver",
+          "placeholder": "e.g. Daniel Taylor"
+        },
+        {
+          "key": "range",
+          "kind": "daterange",
+          "label": "Time range",
+          "placeholder": "e.g. Past 30 days"
+        }
+      ]
+    },
+    "chart": {
+      "chartType": "donut",
+      "echartsOption": {
+        "series": [
+          {
+            "type": "pie",
+            "radius": [
+              "42%",
+              "70%"
+            ],
+            "center": [
+              "50%",
+              "50%"
+            ],
+            "data": [
+              {
+                "value": 26,
+                "itemStyle": {
+                  "color": "#3b82f6"
+                }
+              },
+              {
+                "value": 21,
+                "itemStyle": {
+                  "color": "#10b981"
+                }
+              },
+              {
+                "value": 17,
+                "itemStyle": {
+                  "color": "#f59e0b"
+                }
+              },
+              {
+                "value": 13,
+                "itemStyle": {
+                  "color": "#8b5cf6"
+                }
+              },
+              {
+                "value": 10,
+                "itemStyle": {
+                  "color": "#ec4899"
+                }
+              },
+              {
+                "value": 7,
+                "itemStyle": {
+                  "color": "#ef4444"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "render": "chart"
+  }
+]

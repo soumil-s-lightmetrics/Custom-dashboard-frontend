@@ -1,0 +1,77 @@
+.react-grid-item.react-grid-placeholder {
+  background: var(--purple);
+  opacity: 0.12;
+  border-radius: var(--r-lg);
+}
+
+/* Corner and edge grips. The default only styles the south-east nub. */
+.react-grid-item > .react-resizable-handle {
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+.react-grid-item:hover > .react-resizable-handle {
+  opacity: 1;
+}
+.react-grid-item > .react-resizable-handle-se::after {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--purple);
+  border-bottom: 2px solid var(--purple);
+}
+.react-grid-item > .react-resizable-handle-sw::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid var(--purple);
+  border-bottom: 2px solid var(--purple);
+}
+/* Wide, thin strips along the edges so grabbing them is easy. */
+.react-grid-item > .react-resizable-handle-e {
+  height: 46px;
+  width: 10px;
+  top: 50%;
+  margin-top: -23px;
+  right: 0;
+  cursor: ew-resize;
+}
+.react-grid-item > .react-resizable-handle-e::after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 99px;
+  background: var(--purple-200);
+}
+.react-grid-item > .react-resizable-handle-s {
+  width: 46px;
+  height: 10px;
+  left: 50%;
+  margin-left: -23px;
+  bottom: 0;
+  cursor: ns-resize;
+}
+.react-grid-item > .react-resizable-handle-s::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--purple-200);
+}
+
+.react-grid-item.resizing,
+.react-grid-item.react-draggable-dragging {
+  z-index: 20;
+}
+.react-grid-item.react-draggable-dragging .widget {
+  box-shadow: var(--shadow-lg);
+}

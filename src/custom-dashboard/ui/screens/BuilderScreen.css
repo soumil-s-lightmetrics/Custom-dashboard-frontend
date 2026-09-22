@@ -1,0 +1,795 @@
+.builder {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 100%;
+  overflow: hidden;
+  transition: grid-template-columns 0.16s ease;
+}
+
+.builder__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  /* Without min-height:0 a flex child refuses to shrink below its content, so
+     .gridwrap's overflow never engages and the whole PAGE scrolls instead —
+     which drags the chat header and toolbar off-screen. */
+  min-height: 0;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.builder__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  flex: 0 0 auto;
+}
+
+.builder__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.builder__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 6px 10px;
+}
+.builder__back:hover {
+  color: var(--purple);
+  border-color: var(--purple);
+}
+
+/* The input and an invisible copy of its text share one grid cell, so the
+   input is exactly as wide as the name (never cut off), down to 220px and up
+   to whatever room the bar has left. Text metrics must match on both. */
+.builder__namewrap {
+  display: inline-grid;
+  min-width: 0;
+  max-width: 100%;
+}
+.builder__namewrap::after,
+.builder__name {
+  grid-area: 1 / 1;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: inherit;
+  border: 1px solid transparent;
+  padding: 6px 9px;
+  min-width: 220px;
+}
+.builder__namewrap::after {
+  content: attr(data-value) " ";
+  visibility: hidden;
+  white-space: pre;
+  overflow: hidden;
+}
+.builder__name {
+  width: 100%;
+  color: var(--ink);
+  border-radius: var(--r-sm);
+  background: transparent;
+  outline: none;
+}
+.builder__name:hover {
+  border-color: var(--border);
+}
+.builder__name:focus {
+  border-color: var(--purple);
+  background: #fff;
+}
+
+/* Buttons keep their natural width (no wrapping onto two lines); the title
+   takes whatever is left. */
+.builder__baractions {
+  display: flex;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+.builder__baractions .btn {
+  padding: 7px 12px;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.namepick {
+  position: absolute;
+  top: 52px;
+  right: 18px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lg);
+  padding: 6px;
+}
+.namepick button {
+  background: none;
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+  font-size: 13px;
+  text-align: left;
+  color: var(--ink-2);
+}
+.namepick button:hover {
+  background: var(--purple-50);
+  color: var(--purple);
+}
+.namepick__x {
+  color: var(--muted-2) !important;
+  font-size: 12px !important;
+}
+
+.gridwrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 16px 80px;
+}
+
+.gridcell {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------ empty slot */
+.empty {
+  position: relative;
+  height: 100%;
+  border: 1.5px dashed var(--dashed);
+  border-radius: var(--r-lg);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 16px;
+  transition: none;
+  cursor: pointer;
+}
+.empty:hover {
+  border-color: var(--purple);
+}
+.empty--target {
+  border-color: var(--purple);
+  background: var(--purple-50);
+}
+
+.empty__stack {
+  position: relative;
+}
+
+/* Empty slots are removable too — revealed on hover so the grid stays calm. */
+.empty__remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--muted-2);
+  padding: 4px;
+  border-radius: var(--r-sm);
+  display: inline-flex;
+  opacity: 0;
+  transition: opacity 0.12s, background 0.12s, color 0.12s;
+}
+.empty:hover .empty__remove,
+.empty__remove:focus-visible {
+  opacity: 1;
+}
+.empty__remove:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.empty__plus {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--purple-200);
+  background: var(--purple-100);
+  color: var(--purple);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.empty__plus:hover {
+  background: var(--purple-200);
+}
+
+.empty__title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--purple);
+  margin-bottom: 5px;
+}
+
+.empty__sub {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted-2);
+}
+
+/* ---------------------------------------------------------------- widget */
+.widget {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  /* Prototype styling: heavier flat border, square corners, no shadow. */
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.widget__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 9px;
+  background: var(--bg-3);
+  border-bottom: 1px solid var(--border-2);
+  flex: 0 0 auto;
+  cursor: move;
+}
+
+.widget__titles {
+  min-width: 0;
+}
+
+.widget__title {
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.widget__meta {
+  font-size: 10.5px;
+  color: var(--muted-2);
+  margin-top: 2px;
+  display: flex;
+  gap: 5px;
+}
+.widget__stale {
+  color: var(--stale);
+}
+
+.widget__tools {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+.widget__tools > button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  padding: 5px;
+  border-radius: var(--r-sm);
+  display: inline-flex;
+}
+.widget__tools > button:hover {
+  background: var(--bg-3);
+  color: var(--ink);
+}
+
+.widget__body {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 6px;
+}
+
+.widget__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.widget__error {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  z-index: 6;
+  background: var(--danger-bg);
+  border: 1px solid #fecaca;
+  color: var(--danger);
+  border-radius: var(--r-sm);
+  padding: 7px 9px;
+  font-size: 11.5px;
+}
+
+.widget__empty {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 12.5px;
+  color: var(--muted-2);
+}
+
+/* ----------------------------------------------------------- chart types */
+.charttypes {
+  background: var(--bluegrey-bg);
+  border-color: #c6d6e6;
+  min-width: 176px;
+}
+.charttype {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 9px 11px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+  text-align: left;
+}
+.charttype:hover {
+  background: var(--bluegrey-hover);
+}
+.charttype--on {
+  background: var(--bluegrey-active);
+  color: var(--chart-active);
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------------- table */
+.wtable {
+  height: 100%;
+  overflow: auto;
+}
+.wtable table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+.wtable th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-3);
+  text-align: left;
+  padding: 7px 9px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+.wtable td {
+  padding: 6px 9px;
+  border-bottom: 1px solid #f3f4f6;
+  color: var(--ink-2);
+  white-space: nowrap;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wtable__more {
+  padding: 8px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted-2);
+}
+
+/* ------------------------------------------------------------------ rail */
+.rail {
+  position: relative;
+  background: #fff;
+  border-left: 1px solid var(--border);
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 14px 24px;
+  min-width: 0;
+}
+
+.rail__x {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--muted-2);
+  padding: 4px;
+  border-radius: var(--r-sm);
+  display: inline-flex;
+}
+.rail__x:hover {
+  background: var(--bg-3);
+  color: var(--ink);
+}
+
+.rail__sec {
+  margin-bottom: 26px;
+}
+
+.rail__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-right: 24px;
+}
+.rail__head h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+.rail__all {
+  background: none;
+  border: none;
+  color: var(--purple);
+  font-size: 11.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px;
+}
+.rail__all:hover {
+  text-decoration: underline;
+}
+
+.rail__row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.rail__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Saved reports stack one per row. Two columns inside a 320px rail cut every
+   thumbnail in half and clipped the right-hand one entirely; full width means
+   the chart is actually readable and the list simply scrolls. */
+.rail__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rail__empty {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted-2);
+  background: var(--bg-2);
+  border: 1px dashed var(--border);
+  border-radius: var(--r);
+  padding: 14px;
+  margin: 0;
+}
+
+.tplcard {
+  flex: 0 0 auto;
+  width: 112px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 8px;
+  text-align: left;
+}
+.tplcard:hover {
+  border-color: var(--purple);
+}
+.tplcard__thumb {
+  height: 62px;
+  border-radius: var(--r-sm);
+  background: var(--bg-3);
+  display: grid;
+  place-items: center;
+  color: var(--muted-2);
+  margin-bottom: 7px;
+}
+.tplcard__name {
+  font-size: 11.5px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ------------------------------------------------- suggested report card */
+.sugcard {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+}
+.sugcard:hover,
+.sugcard--open {
+  border-color: var(--purple);
+}
+
+.sugcard__open {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: var(--r);
+  padding: 8px;
+  text-align: left;
+}
+.sugcard__thumb {
+  height: 96px;
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+  display: grid;
+  place-items: center;
+  color: var(--muted-2);
+  margin-bottom: 7px;
+  overflow: hidden;
+}
+.sugcard__name {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sugcard__desc {
+  font-size: 10.5px;
+  color: var(--muted-2);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sugcard__cta {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--purple);
+  color: #fff;
+  font-size: 12px;
+  border-radius: var(--r);
+  opacity: 0;
+}
+.sugcard--pick:hover .sugcard__cta {
+  opacity: 1;
+}
+
+/* Only rendered for reports that declare parameters. */
+.sugcard__form {
+  border-top: 1px solid var(--border);
+  padding: 9px 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.sugcard__field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.sugcard__field span {
+  font-size: 10.5px;
+  color: var(--muted-2);
+}
+.sugcard__field input {
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--ink);
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: #fff;
+  outline: none;
+  min-width: 0;
+}
+.sugcard__field input:focus {
+  border-color: var(--purple);
+}
+.sugcard__actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 1px;
+}
+.sugcard__run,
+.sugcard__cancel {
+  font-size: 11.5px;
+  padding: 5px 12px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--ink-2);
+}
+.sugcard__run {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: #fff;
+}
+.sugcard__run:disabled {
+  opacity: 0.45;
+}
+.sugcard__cancel:hover {
+  background: var(--bg-3);
+}
+
+.savedcard {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+}
+.savedcard:hover {
+  border-color: var(--purple);
+}
+
+/* The whole card is the insert target; the delete button sits above it. */
+.savedcard__open {
+  position: relative;
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: var(--r);
+  padding: 8px;
+  text-align: left;
+}
+.savedcard__thumb {
+  height: 120px;
+  border-radius: var(--r-sm);
+  background: var(--bg-2);
+  display: grid;
+  place-items: center;
+  color: var(--muted-2);
+  margin-bottom: 7px;
+  overflow: hidden;
+}
+.savedcard__name {
+  font-size: 11.5px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 22px; /* clear of the delete button */
+}
+.savedcard__cta {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--purple);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: var(--r);
+  opacity: 0;
+}
+.savedcard--pick:hover .savedcard__cta {
+  opacity: 1;
+}
+
+.savedcard__del {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  background: none;
+  border: none;
+  color: var(--muted-2);
+  padding: 3px;
+  border-radius: var(--r-sm);
+  display: inline-flex;
+  opacity: 0;
+}
+/* Revealed on hover, but always reachable by keyboard. */
+.savedcard:hover .savedcard__del,
+.savedcard__del:focus-visible {
+  opacity: 1;
+}
+.savedcard__del:hover {
+  background: var(--bg-3);
+  color: var(--danger);
+}
+
+.savedcard__confirm {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r);
+  background: rgba(255, 255, 255, 0.96);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-size: 12px;
+  color: var(--ink);
+  text-align: center;
+  padding: 10px;
+  line-height: 1.4;
+}
+.savedcard__confirmbtns {
+  display: flex;
+  gap: 7px;
+}
+.savedcard__yes,
+.savedcard__no {
+  font-size: 11.5px;
+  padding: 4px 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--ink-2);
+}
+.savedcard__yes {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+.savedcard__no:hover {
+  background: var(--bg-3);
+}
+
+/* Only collapse the side panels when there is genuinely no room for them. */
+@media (max-width: 900px) {
+  .builder {
+    grid-template-columns: 1fr !important;
+  }
+  .rail {
+    display: none;
+  }
+}
+
+/* The section the "+" menu sent you to, so picking an option is never silent. */
+.rail__sec--focus .rail__head h3 {
+  color: var(--purple);
+}
+.rail__sec--focus .rail__grid,
+.rail__sec--focus .rail__stack,
+.rail__sec--focus .rail__row,
+.rail__sec--focus .rail__empty {
+  outline: 2px solid var(--purple-200);
+  outline-offset: 6px;
+  border-radius: var(--r);
+}
+
+.rail__hint {
+  font-size: 11.5px;
+  color: var(--purple);
+  background: var(--purple-50);
+  border: 1px solid var(--purple-200);
+  border-radius: var(--r-sm);
+  padding: 7px 9px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+.env*.local
+.env.production
+# Local runtime data (dashboards, chat history, query cache). Never commit it.
+.data/
+data/
+npm-debug.log*
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts

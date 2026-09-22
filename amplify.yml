@@ -1,0 +1,35 @@
+# AWS Amplify Hosting build spec (Web Compute / SSR).
+#
+# Env vars (App settings -> Environment variables). Required:
+#   CD_LM_API_BASE, CD_LM_ACCESS_TOKEN, CD_LM_REFERER, CD_CLIENT_ID,
+#   CD_FLEET_ID, CD_OPENAI_API_KEY
+#   CD_S3_BUCKET (+ CD_S3_REGION) — without a bucket the app writes JSON files
+#     to local disk, which Amplify's short-lived servers neither share nor
+#     keep: saves are lost and new charts fail when the "ask" and "visualize"
+#     requests land on different instances.
+# Optional: CD_LM_USER_TIMEZONE, CD_VIZ_MODEL, CD_UTILITY_MODEL,
+#   CD_DATERANGE_PICKER_PREFILL, CD_USER_NAME, CD_SUGGESTION_TTL_DAYS,
+#   CD_UPSTREAM_CONNECT_TIMEOUT, CD_UPSTREAM_READ_TIMEOUT, CD_S3_PREFIX
+#
+# The app's compute role needs s3:GetObject, s3:PutObject and s3:DeleteObject
+# on the prefix, plus s3:ListBucket on the bucket.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        # Amplify doesn't expose console env vars to the SSR runtime, so write
+        # them to .env.production where Next loads them at request time.
+        - env | grep -e '^CD_' >> .env.production || true
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*

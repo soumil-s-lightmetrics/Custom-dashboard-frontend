@@ -1,0 +1,30 @@
+{
+  "name": "custom-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1137.0",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.6",
+    "next": "15.5.25",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-grid-layout": "^1.5.4",
+    "react-resizable": "^3.2.0",
+    "zustand": "^4.5.7"
+  },
+  "overrides": {
+    "postcss": "^8.5.23"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.6.0"
+  }
+}

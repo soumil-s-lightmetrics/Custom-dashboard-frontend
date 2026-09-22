@@ -1,0 +1,263 @@
+/* Dashboard picker — step 2. Reuses the persona screen's page frame
+   (.persona / .persona__inner / .persona__title / .persona__sub). */
+
+.picker__inner {
+  max-width: 980px;
+}
+
+.picker__role {
+  color: var(--purple);
+  text-decoration: none;
+}
+.picker__role:hover {
+  text-decoration: underline;
+}
+
+.picker__error {
+  margin-bottom: 18px;
+}
+
+.picker__loading {
+  display: grid;
+  place-items: center;
+  padding: 48px 0;
+}
+
+/* Flex rather than grid so a short last row (e.g. only the "New dashboard"
+   card) sits centered instead of hugging the left column. Each card keeps the
+   exact width a grid column would give it: --cols per row, --gap between. */
+.picker__grid {
+  --cols: 3;
+  --gap: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
+}
+.picker__grid > * {
+  flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  min-width: 0;
+}
+
+.picker__empty {
+  margin: 22px 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------ new card */
+.picker-new {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 236px;
+  padding: 18px;
+  background: #fff;
+  border: 1.5px dashed var(--dashed);
+  border-radius: var(--r);
+  color: var(--ink-2);
+  text-align: center;
+}
+.picker-new:not(:disabled):hover {
+  border-color: var(--purple);
+  background: var(--purple-50);
+}
+.picker-new__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--purple-200);
+  color: var(--purple);
+  background: #fff;
+  margin-bottom: 6px;
+}
+.picker-new__title {
+  font-size: 14px;
+  font-weight: 600;
+}
+.picker-new__desc {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* -------------------------------------------------------- dashboard card */
+.picker-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 236px;
+  background: var(--bg-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.picker-card:hover {
+  border-color: var(--purple);
+}
+
+.picker-card__open {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+}
+.picker-card__open:disabled {
+  cursor: default;
+}
+
+.picker-card__thumb {
+  display: block;
+  height: 104px;
+  padding: 10px 12px;
+}
+
+.picker-card__blank {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 100%;
+  font-size: 12px;
+  color: var(--muted-2);
+}
+
+.picker-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 auto;
+  padding: 12px 14px 12px;
+}
+
+.picker-card__name {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.picker-card__name:hover {
+  color: var(--purple);
+}
+
+.picker-card__rename {
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid var(--purple);
+  border-radius: var(--r-sm);
+  padding: 3px 6px;
+  outline: none;
+}
+
+.picker-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.picker-card__persona {
+  font-size: 11px;
+  color: var(--teal);
+  background: var(--teal-bg);
+  border-radius: var(--r-pill);
+  padding: 1px 6px;
+}
+
+.picker-card__actions,
+.picker-card__confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.picker-card__actions .btn,
+.picker-card__confirm .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.picker-card__confirm span {
+  flex: 1 1 auto;
+  font-size: 12px;
+  color: var(--danger);
+}
+
+.picker-card__link {
+  margin-left: auto;
+  padding: 4px 2px;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  color: var(--muted);
+}
+.picker-card__link:hover {
+  color: var(--purple);
+  text-decoration: underline;
+}
+
+.picker .icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--muted);
+}
+.picker .icon-btn--danger:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.picker .btn--danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+.picker-missing {
+  align-content: center;
+  gap: 14px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.picker-missing p {
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .picker__grid {
+    --cols: 2;
+  }
+}
+@media (max-width: 560px) {
+  .picker__grid {
+    --cols: 1;
+  }
+}
