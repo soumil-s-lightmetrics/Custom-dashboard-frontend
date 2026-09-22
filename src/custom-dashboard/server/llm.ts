@@ -22,6 +22,7 @@ export async function jsonCompletion(opts: {
   system: string;
   user: string;
   temperature: number;
+  timeoutMs?: number;
 }): Promise<string> {
   if (!settings.openaiApiKey) {
     throw new ApiError("openai_not_configured", "CD_OPENAI_API_KEY is not set.", 503);
@@ -42,6 +43,7 @@ export async function jsonCompletion(opts: {
       response_format: { type: "json_object" },
       temperature: opts.temperature,
     }),
+    signal: opts.timeoutMs ? AbortSignal.timeout(opts.timeoutMs) : undefined,
   });
 
   const text = await resp.text();

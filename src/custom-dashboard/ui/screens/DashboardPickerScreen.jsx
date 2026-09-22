@@ -11,6 +11,7 @@ import { relativeTime } from "../lib/format";
 import { miniOption } from "../lib/miniOption";
 import { useSessionStore } from "../store/useSessionStore";
 import { ROOT, dashboardPath } from "../lib/routes";
+import { track, trackError } from "../lib/track";
 
 /**
  * Step 2: pick (or create) a dashboard. Only dashboards tagged with the chosen
@@ -37,7 +38,10 @@ export default function DashboardPickerScreen() {
     api
       .listDashboards(showsAll ? null : persona)
       .then((r) => setDashboards(r.dashboards || []))
-      .catch((err) => setError(err.message));
+      .catch((err) => {
+        trackError("dashboards_list_failed", err, { persona });
+        setError(err.message);
+      });
   }, [persona, showsAll]);
 
   const titleOf = useMemo(() => {
@@ -49,8 +53,10 @@ export default function DashboardPickerScreen() {
     setCreating(true);
     try {
       const { dashboard } = await api.createDashboard({ persona: persona || "generalist" });
+      track("dashboard_created", { dashboardId: dashboard.id, persona });
       router.push(dashboardPath(dashboard.id));
     } catch (err) {
+      trackError("dashboard_create_failed", err, { persona });
       setError(err.message);
       setCreating(false);
     }

@@ -8,6 +8,7 @@ import DashboardPickerScreen from "./screens/DashboardPickerScreen";
 import PersonaScreen from "./screens/PersonaScreen";
 import { useSessionStore } from "./store/useSessionStore";
 import { ROOT } from "./lib/routes";
+import { track, trackError } from "./lib/track";
 
 const Spinner = () => (
   <div className="center-page">
@@ -31,12 +32,22 @@ export default function AppShell({ screen, dashboardId }) {
     api
       .config()
       .then(hydrate)
-      .catch(() => hydrate({}));
+      .catch((err) => {
+        trackError("config_failed", err);
+        hydrate({});
+      });
   }, [ready, hydrate]);
 
   useEffect(() => {
-    if (needsPersona) router.replace(ROOT);
-  }, [needsPersona, router]);
+    if (needsPersona) {
+      track("redirect_to_persona", { from: screen });
+      router.replace(ROOT);
+    }
+  }, [needsPersona, router, screen]);
+
+  useEffect(() => {
+    if (ready && !needsPersona) track("screen_view", { screen, dashboardId, persona });
+  }, [ready, needsPersona, screen, dashboardId, persona]);
 
   if (!ready || needsPersona) return <Spinner />;
   if (screen === "persona") return <PersonaScreen />;

@@ -30,7 +30,14 @@ function seeds(personaId: string, n = 3): Suggestion[] {
 }
 
 async function cached(personaId: string): Promise<Obj | null> {
-  const doc = await storage.read(FILE, DEFAULT);
+  let doc;
+  try {
+    doc = await storage.read(FILE, DEFAULT);
+  } catch (err) {
+    // An S3 failure here must not break "Never throws" — fall through to LLM/seeds.
+    console.warn(`[suggestions] cache read failed: ${(err as Error).message}`);
+    return null;
+  }
   if (doc.promptVersion !== PROMPT_VERSION) return null;
   const entry = doc.entries?.[personaId];
   if (!entry) return null;
@@ -81,6 +88,9 @@ where domainHint is one of: ${domains.join(", ")}`;
       system,
       user: `Write ${n} starter questions.`,
       temperature: 0.7,
+      // Starter questions are nice-to-have; fall back to seeds rather than
+      // hold the request past Amplify's compute timeout.
+      timeoutMs: 15_000,
     }),
   );
 

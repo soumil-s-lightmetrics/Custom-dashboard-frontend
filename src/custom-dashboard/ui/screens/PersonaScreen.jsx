@@ -7,6 +7,7 @@ import Icon from "../components/common/Icon";
 import StepDots from "../components/common/StepDots";
 import { useSessionStore } from "../store/useSessionStore";
 import { DASHBOARDS } from "../lib/routes";
+import { track, trackError } from "../lib/track";
 
 export default function PersonaScreen() {
   const router = useRouter();
@@ -23,15 +24,16 @@ export default function PersonaScreen() {
       .catch(() => setPersonas([]));
   }, []);
 
-  async function choose(personaId) {
+  function choose(personaId) {
     setBusy(true);
-    try {
-      await api.selectPersona(personaId);
-      setPersona(personaId);
-      router.push(DASHBOARDS);
-    } finally {
-      setBusy(false);
-    }
+    track(personaId ? "persona_selected" : "persona_skipped", { persona: personaId });
+    // Only warms the server's suggestion cache — its answer isn't used here,
+    // so never let a slow or failing call hold the user on this screen.
+    api
+      .selectPersona(personaId)
+      .catch((err) => trackError("persona_select_failed", err, { persona: personaId }));
+    setPersona(personaId);
+    router.push(DASHBOARDS);
   }
 
   const nameOk = userName.trim().length > 0;

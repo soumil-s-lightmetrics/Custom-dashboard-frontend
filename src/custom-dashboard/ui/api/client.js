@@ -1,4 +1,6 @@
 // Same-origin Next.js route handlers (src/app/api/custom-dashboard).
+import { session } from "../lib/track";
+
 const BASE = "/api/custom-dashboard";
 
 export class ApiError extends Error {
@@ -13,7 +15,10 @@ export class ApiError extends Error {
 async function request(path, { method = "GET", body } = {}) {
   const res = await fetch(BASE + path, {
     method,
-    headers: body ? { "Content-Type": "application/json" } : undefined,
+    headers: {
+      ...(body ? { "Content-Type": "application/json" } : {}),
+      "X-Session-Id": session(),
+    },
     body: body ? JSON.stringify(body) : undefined,
   });
 

@@ -13,6 +13,11 @@
 #
 # The app's compute role needs s3:GetObject, s3:PutObject and s3:DeleteObject
 # on the prefix, plus s3:ListBucket on the bucket.
+#
+# Logs: every API call writes a JSON access line ({"kind":"access",...}) and
+# the UI posts flow events ({"kind":"flow",...}) to stdout. View them under
+# Amplify console -> Monitoring -> Hosting compute logs (CloudWatch group
+# /aws/amplify/<appId>). Join a user's journey on "sessionId".
 version: 1
 frontend:
   phases:
