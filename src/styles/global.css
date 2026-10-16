@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------- buttons */
+/* Prototype styling: flat, squared, no easing. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border-2);
+  font-size: 13px;
+  font-weight: 400;
+  padding: 7px 14px;
+  transition: none;
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn--solid {
+  background: var(--purple);
+  color: #fff;
+}
+.btn--solid:not(:disabled):hover {
+  background: var(--purple-hover);
+}
+.btn--outline {
+  background: #fff;
+  color: var(--purple);
+  border-color: var(--purple);
+}
+.btn--outline:not(:disabled):hover {
+  background: var(--purple-50);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--muted);
+  border-color: var(--border);
+}
+.btn--ghost:hover {
+  background: var(--bg-3);
+}
+.btn--link {
+  background: transparent;
+  color: var(--purple);
+  border: none;
+  padding: 8px 4px;
+}
+.btn--link:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------ pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: var(--r-pill);
+  border: 1px solid currentColor;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0;
+  padding: 2px 7px;
+}
+.pill--teal {
+  background: var(--teal-bg);
+  color: var(--teal);
+}
+.pill--amber {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+
+/* --------------------------------------------------------------- popovers */
+.popover {
+  position: absolute;
+  z-index: 60;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lg);
+  padding: 6px;
+  min-width: 190px;
+}
+.popover__label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--muted-2);
+  padding: 8px 10px 6px;
+  text-transform: uppercase;
+}
+.popover__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 9px 10px;
+  font-size: 13px;
+  color: var(--ink-2);
+  text-align: left;
+}
+.popover__item:hover {
+  background: var(--purple-50);
+  color: var(--purple);
+}
+.popover__count {
+  margin-left: auto;
+  background: var(--bg-3);
+  color: var(--muted);
+  border-radius: var(--r-pill);
+  font-size: 10.5px;
+  padding: 1px 7px;
+}
+
+/* ---------------------------------------------------------------- spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-2);
+  border-top-color: var(--purple);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.center-page {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.error-banner {
+  background: var(--danger-bg);
+  border: 1px solid #fecaca;
+  color: var(--danger);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  font-size: 13px;
+}
